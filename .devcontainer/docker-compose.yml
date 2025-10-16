@@ -1,0 +1,73 @@
+version: "3.9"
+
+# Define the services/containers that will be created
+services:
+  locksmith:
+    # Buid the Dockerfile in the current directory
+    build: .
+    # Helps ensure that Docker shuts down processes correctly
+    init: true
+    # Restart automatically unless the container was stopped by the user
+    restart: unless-stopped
+    # 1. Bind mount the workspace to /workspace in the container. This must match the "workspaceFolder" in devcontainer.json.
+    # 2. Create named volumes for node_modules and pnpm store so that they persist between container restarts and are not shared with the host. This improves performance, especially on Windows and macOS.
+    # 3. Create a named volume for pnpm-home to persist pnpm global installs and cache.
+    volumes:
+      - ..:/workspace
+      - node_modules:/workspace/node_modules
+      - pnpm-store:/workspace/.pnpm-store
+      - pnpm-home:/pnpm-home
+    # Keeps the container running so that you can connect to it with VS Code
+    command: sleep infinity
+    # Expose port 3000 for the Next.js web app
+    ports:
+      - "3000:3000"
+    # Wait for Postgres to be healthy before starting this service
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # 1. Inform pnpm where to put the store and global executables
+    # 2. Add pnpm global executables to PATH
+    # 3. Tell starship where its config file is
+    # 4. Set default Postgres connection details to make CLI tools like psql easier
+    environment:
+      PNPM_STORE_DIR: /workspace/.pnpm-store
+      PNPM_HOME: /pnpm-home
+      PATH: /pnpm-home:$PATH
+      STARSHIP_CONFIG: /workspace/.devcontainer/starship.toml
+      PGHOST: postgres
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+      PGPORT: 5432
+
+  postgres:
+    # Use the official Postgres image
+    image: postgres:17
+    # Restart automatically unless the container was stopped by the user
+    restart: unless-stopped
+    # Set username, password, and database name
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    # Expose the default Postgres port
+    ports:
+      - "5432:5432"
+    # Persist Postgres data to a named volume so that it is not lost when the container is removed
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # Add a healthcheck to ensure that Postgres is ready before other services try to connect
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+# Define named volumes
+volumes:
+  node_modules:
+  pnpm-store:
+  pnpm-home:
+  postgres_data:
