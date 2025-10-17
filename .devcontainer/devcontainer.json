@@ -4,7 +4,6 @@
   "service": "locksmith",
   "workspaceFolder": "/workspace",
   "remoteUser": "node",
-  // Use the config below for PRETTIER + ESLINT
   "customizations": {
     "vscode": {
       "extensions": [

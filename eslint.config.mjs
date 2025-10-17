@@ -12,6 +12,25 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      // Emulate the TypeScript style of exempting names starting with `_`
+      // https://typescript-eslint.io/rules/no-unused-vars/#what-benefits-does-this-rule-have-over-typescript
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          args: "all",
+          argsIgnorePattern: "^_",
+          caughtErrors: "all",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
+    },
+  },
+  // Disable ESLint rules that would conflict with Prettier. Keep this plugin towards the end.
   eslintConfigPrettier,
   {
     ignores: [
@@ -20,7 +39,8 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
-      "components/ui/**",
+      "components/ui/**", // Ignore components installed from shadcn/ui
+      "vendor/**", // Ignore vendored libraries
     ],
   },
 ];
