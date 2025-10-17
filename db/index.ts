@@ -34,7 +34,7 @@ import * as schema from "./schema";
  *           quickly; this works well with Fluid's lifecycle + the attach helper.
  *
  * Client-side pooling + Neon pooler:
- *  - Using a pg Pool on the app side **and** a Neon pooled endpoint is safe
+ *  - Using a pg Pool on the client side **and** a Neon pooled endpoint is safe
  *    here because:
  *      a) We always release clients back to the app pool promptly.
  *      b) Fluid's attachDatabasePool ensures idle clients are closed before
@@ -46,6 +46,14 @@ import * as schema from "./schema";
  *  - Maps JS identifiers to SQL names in snake_case (e.g., `createdAt` -> `created_at`)
  *    so your TypeScript objects can stay idiomatic while the DB uses conventional
  *    snake_case columns/tables.
+ *
+ * Further reading:
+ *  - Connection Pooling with Vercel Functions
+ *    https://vercel.com/guides/connection-pooling-with-functions
+ *  - The real serverless compute to database connection problem, solved:
+ *    https://vercel.com/blog/the-real-serverless-compute-to-database-connection-problem-solved
+ *  - Connect to Neon
+ *    https://neon.com/docs/connect/connect-intro
  */
 
 // Environment flags
