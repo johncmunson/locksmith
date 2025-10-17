@@ -15,3 +15,5 @@ Locksmith is a Next.js starter template that comes with a bulletproof and produc
 - rate limiting
 - db indexes
 - dark mode
+- drizzle studio
+- vitest
