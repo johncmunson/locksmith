@@ -1,0 +1,11 @@
+# Prettier Configuration
+# Currently using default settings, hence this file is empty.
+
+# If you're fine with the defaults, you can delete this file if you prefer, but beware...
+
+# If you are using the VSCode prettier extension, the presence of this file forces the
+# extension use the same formatting settings as what the CLI would use, ensuring consistency.
+# If you delete this file, the extension may revert to its own default settings.
+
+# i.e. Running `pnpm format` vs. the "format on save" feature in VSCode could start producing
+# different results.
