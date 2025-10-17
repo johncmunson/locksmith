@@ -14,3 +14,4 @@ Locksmith is a Next.js starter template that comes with a bulletproof and produc
 - APP_NAME environment variable (to replace mentions of Locksmith)
 - rate limiting
 - db indexes
+- dark mode
