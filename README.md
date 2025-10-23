@@ -4,7 +4,6 @@ Locksmith is a Next.js starter template that comes with a bulletproof and produc
 
 ## Todo
 
-- Check why "format on save" is different from "pnpm format". See auth-card.tsx as an example.
 - Delete account functionality
 - Microsoft OAuth
 - react-email CLI and dev server
