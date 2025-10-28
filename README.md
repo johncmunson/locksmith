@@ -4,6 +4,7 @@ Locksmith is a Next.js starter template that comes with a bulletproof and produc
 
 ## Todo
 
+- Claude Code
 - Delete account functionality
 - Microsoft OAuth
 - react-email CLI and dev server
