@@ -17,3 +17,8 @@ Locksmith is a Next.js starter template that comes with a bulletproof and produc
 - drizzle studio
 - vitest
 - ci/cd
+
+## Roadmap
+
+- Teams / RBAC
+-
