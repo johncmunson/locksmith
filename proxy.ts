@@ -145,7 +145,7 @@ const authGuard: Guard = async (req) => {
  * ============================
  */
 
-export async function middleware(req: NextRequest): Promise<NextResponse> {
+export async function proxy(req: NextRequest): Promise<NextResponse> {
   // Compose your guards. Order matters:
   // 1) Cheap fast-path exclusions (public/system/prefetch)
   // 2) Auth
@@ -160,12 +160,11 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
  */
 
 export const config = {
-  runtime: "nodejs" as const, // Use Node runtime so we can safely call auth.api.* from middleware
-  matcher: [
-    /*
-     * Match all paths - we'll handle exclusions in the middleware function itself
-     * This ensures we have full control over what gets processed
-     */
-    "/(.*)",
-  ],
+ matcher: [
+   /*
+    * Match all paths - we'll handle exclusions in the middleware function itself
+    * This ensures we have full control over what gets processed
+    */
+   "/(.*)",
+ ]
 };
