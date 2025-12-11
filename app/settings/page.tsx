@@ -6,7 +6,7 @@ import { SettingsSignInMethodsCard } from "@/components/app/settings-sign-in-met
 
 export default function SettingsPage() {
   return (
-    <div className="m-8 grid gap-8">
+    <div className="px-2 my-8 mx-auto max-w-3xl grid gap-8">
       <SettingsAvatarCard />
       <SettingsDisplayNameCard />
       <SettingsSignInMethodsCard />
