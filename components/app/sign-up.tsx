@@ -6,11 +6,34 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
-import { useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { AuthCard } from "@/components/app/auth-card";
 import { useAuthHelpers } from "@/hooks/use-auth-helpers";
 
 export default function SignUp() {
+  return (
+    <Suspense
+      fallback={
+        <AuthCard
+          mode="sign-up"
+          title="Loading sign-up"
+          description="Preparing your sign-up form..."
+          footerText=""
+          footerLinkText=""
+          footerHref="/sign-in"
+          loading
+          onSubmit={async () => undefined}
+          onSignInSocialClick={async () => undefined}
+          children={undefined}
+        />
+      }
+    >
+      <SignUpContent />
+    </Suspense>
+  );
+}
+
+function SignUpContent() {
   const {
     loading,
     signUpFields,

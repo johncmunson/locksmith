@@ -8,8 +8,32 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { AuthCard } from "@/components/app/auth-card";
 import { useAuthHelpers } from "@/hooks/use-auth-helpers";
+import { Suspense } from "react";
 
 export default function SignIn() {
+  return (
+    <Suspense
+      fallback={
+        <AuthCard
+          mode="sign-in"
+          title="Loading sign-in"
+          description="Preparing your sign-in form..."
+          footerText=""
+          footerLinkText=""
+          footerHref="/sign-up"
+          loading
+          onSubmit={async () => undefined}
+          onSignInSocialClick={async () => undefined}
+          children={undefined}
+        />
+      }
+    >
+      <SignInContent />
+    </Suspense>
+  );
+}
+
+function SignInContent() {
   const {
     loading,
     signInFields,
