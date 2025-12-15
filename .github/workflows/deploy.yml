@@ -1,0 +1,38 @@
+name: Migrate DB and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  migrate-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run database migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_DIRECT }}
+        run: pnpm run db:migrate
+
+      - name: Pull Vercel project config
+        run: npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_GITHUB_ACTIONS_TOKEN }}
+
+      - name: Deploy to Vercel
+        run: npx vercel deploy --prod --yes --token=${{ secrets.VERCEL_GITHUB_ACTIONS_TOKEN }}
