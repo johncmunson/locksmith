@@ -8,31 +8,39 @@ on:
 jobs:
   migrate-and-deploy:
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: pnpm
-
-      - name: Enable pnpm
-        run: corepack enable
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Run database migrations
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_DIRECT }}
-        run: pnpm run db:migrate
-
-      - name: Pull Vercel project config
-        run: npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_GITHUB_ACTIONS_TOKEN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: pnpm db:migrate
 
       - name: Deploy to Vercel
-        run: npx vercel deploy --prod --yes --token=${{ secrets.VERCEL_GITHUB_ACTIONS_TOKEN }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          pnpm dlx vercel deploy \
+            --prod \
+            --yes \
+            --token=$VERCEL_TOKEN \
+            --org=$VERCEL_ORG_ID \
+            --project=$VERCEL_PROJECT_ID
