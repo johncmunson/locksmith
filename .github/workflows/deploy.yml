@@ -36,12 +36,11 @@ jobs:
       - name: Deploy to Vercel
         env:
           VERCEL_GITHUB_ACTIONS_TOKEN: ${{ secrets.VERCEL_GITHUB_ACTIONS_TOKEN }}
-          VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+          # VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
         run: |
           pnpm dlx vercel deploy \
             --prod \
             --yes \
             --token=$VERCEL_GITHUB_ACTIONS_TOKEN \
-            --org=$VERCEL_ORG_ID \
             --project=$VERCEL_PROJECT_ID
