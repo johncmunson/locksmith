@@ -9,6 +9,8 @@ jobs:
   migrate-and-deploy:
     runs-on: ubuntu-latest
     environment: Production
+    env:
+      DATABASE_URL_DIRECT: ${{ secrets.DATABASE_URL_DIRECT }}
 
     steps:
       - name: Checkout repository
