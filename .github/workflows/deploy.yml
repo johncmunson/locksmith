@@ -11,6 +11,8 @@ jobs:
     environment: Production
     env:
       DATABASE_URL_DIRECT: ${{ secrets.DATABASE_URL_DIRECT }}
+      VERCEL_GITHUB_ACTIONS_TOKEN: ${{ secrets.VERCEL_GITHUB_ACTIONS_TOKEN }}
+      VERCEL_SCOPE: ${{ secrets.VERCEL_SCOPE }}
 
     steps:
       - name: Checkout repository
@@ -30,25 +32,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Confirm DB secret visibility
-        run: |
-          if printenv DATABASE_URL_DIRECT >/dev/null; then
-            echo "DATABASE_URL_DIRECT is SET"
-            printenv DATABASE_URL_DIRECT
-          else
-            echo "DATABASE_URL_DIRECT is NOT SET"
-            exit 1
-          fi
-
       - name: Run database migrations
-        env:
-          DATABASE_URL_DIRECT: ${{ secrets.DATABASE_URL_DIRECT }}
         run: pnpm db:migrate
 
       - name: Deploy to Vercel
-        env:
-          VERCEL_GITHUB_ACTIONS_TOKEN: ${{ secrets.VERCEL_GITHUB_ACTIONS_TOKEN }}
-          VERCEL_SCOPE: ${{ secrets.VERCEL_SCOPE }}
         run: |
           pnpm dlx vercel deploy \
             --prod \
