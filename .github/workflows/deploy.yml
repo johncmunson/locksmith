@@ -28,6 +28,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Debug DB URL (masked)
+        run: |
+          if [ -z "$DATABASE_URL_DIRECT" ]; then
+            echo "DATABASE_URL_DIRECT is EMPTY"
+            exit 1
+          else
+            echo "::add-mask::$DATABASE_URL_DIRECT"
+            echo "DATABASE_URL_DIRECT is SET - $DATABASE_URL_DIRECT"
+          fi
+
       - name: Run database migrations
         env:
           DATABASE_URL_DIRECT: ${{ secrets.DATABASE_URL_DIRECT }}
