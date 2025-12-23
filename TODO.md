@@ -1,0 +1,11 @@
+- Delete account functionality
+- Microsoft OAuth
+- react-email CLI and dev server
+- Update email templates to use react-email components
+- rate limiting
+- db indexes
+- dark mode
+- drizzle studio
+- vitest
+- ci/cd
+- teams
