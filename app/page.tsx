@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="flex-1 flex items-center justify-center min-h-full">
       <div className="max-w-md w-full space-y-8 p-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Welcome to Locksmith!</h1>

@@ -26,9 +26,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-gray-50`}
       >
-        {children}
+        <main className="flex-1 flex flex-col">{children}</main>
+        <footer className="text-center py-4 text-sm text-gray-600">
+          <a
+            href="https://github.com/johncmunson/locksmith"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-900 underline"
+          >
+            View on GitHub
+          </a>
+        </footer>
         <Toaster position="bottom-right" richColors />
       </body>
     </html>
