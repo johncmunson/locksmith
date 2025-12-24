@@ -1,8 +1,6 @@
-# Locksmith
+![Locksmith Hero Image](./app/opengraph-image.png)
 
 Locksmith is a Next.js starter template that comes with a bulletproof and production-grade auth setup out of the box. [Live Demo](https://locksmith-nextjs.vercel.app/).
-
-![Locksmith](./public/locksmith.png)
 
 ## Features
 
@@ -182,6 +180,7 @@ NEXT_PUBLIC_BASE_PATH=
 #### Option A: Local Development with Docker
 
 1. Start the local PostgreSQL database:
+
    ```bash
    pnpm start-local-db
    ```
@@ -189,11 +188,13 @@ NEXT_PUBLIC_BASE_PATH=
 2. The database will be available at `postgresql://postgres:postgres@localhost:5432/postgres`
 
 3. Run migrations:
+
    ```bash
    pnpm db:migrate
    ```
 
 4. To stop the database:
+
    ```bash
    pnpm stop-local-db
    ```
@@ -225,6 +226,7 @@ NEXT_PUBLIC_BASE_PATH=
    ```
 
 **Important Notes:**
+
 - The application uses connection pooling optimized for serverless environments
 - For migrations, use `DATABASE_URL_DIRECT` (or `DATABASE_URL` if you don't have a direct connection)
 - The codebase automatically handles connection lifecycle for Vercel Fluid compute in production
@@ -279,6 +281,7 @@ NEXT_PUBLIC_BASE_PATH=
    - Emails will automatically be routed to test addresses in development mode
 
 **Development Behavior:**
+
 - All emails in development are sent to Resend test addresses with labels
 - Email subjects are prefixed with `[DEV]`
 - This prevents accidental emails to real users during development
@@ -355,6 +358,7 @@ To set it up:
    - Add the same secrets there if you want environment-specific configuration
 
 **Workflow Behavior:**
+
 - Runs on every push to `main` branch
 - Installs dependencies
 - Runs database migrations using `DATABASE_URL_DIRECT`
@@ -365,21 +369,25 @@ To set it up:
 #### Local Development
 
 1. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 2. Start the local database (if using Docker):
+
    ```bash
    pnpm start-local-db
    ```
 
 3. Run migrations:
+
    ```bash
    pnpm db:migrate
    ```
 
 4. Start the development server:
+
    ```bash
    pnpm dev
    ```
@@ -474,3 +482,7 @@ pnpm db:check
 - Update the database schema in `db/schema/`
 - Customize UI components in `components/`
 - Add your own features and functionality
+
+---
+
+![Locksmith](./public/locksmith.png)

@@ -160,11 +160,11 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
  */
 
 export const config = {
- matcher: [
-   /*
-    * Match all paths - we'll handle exclusions in the middleware function itself
-    * This ensures we have full control over what gets processed
-    */
-   "/(.*)",
- ]
+  matcher: [
+    /*
+     * Match all paths - we'll handle exclusions in the middleware function itself
+     * This ensures we have full control over what gets processed
+     */
+    "/(.*)",
+  ],
 };

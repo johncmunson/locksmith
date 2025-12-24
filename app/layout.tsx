@@ -16,6 +16,27 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Locksmith",
   description: "A modern Next.js starter with authentication",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ?? "https://locksmith-nextjs.vercel.app",
+  ),
+  icons: {
+    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>",
+  },
+  openGraph: {
+    title: "Locksmith",
+    description:
+      "A modern Next.js starter with a bulletproof and production-grade auth setup out of the box",
+    url: "/",
+    siteName: "Locksmith",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Locksmith",
+    description:
+      "A modern Next.js starter with a bulletproof and production-grade auth setup out of the box",
+  },
 };
 
 export default function RootLayout({
